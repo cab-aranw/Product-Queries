@@ -63,7 +63,24 @@ SELECT Product_Number, Description, Units_On_Hand, Price FROM Product WHERE (Pro
               <Mapping SourceColumn="Units_On_Hand" DataSetColumn="Units_On_Hand" />
               <Mapping SourceColumn="Price" DataSetColumn="Price" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="ProductDBConnectionString (Settings)" DbObjectName="dbo.Product" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByPrice" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByPrice" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillByPrice">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Product_Number, Description, Units_On_Hand, Price FROM dbo.Product Order By Price</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="ProductDBConnectionString (Settings)" DbObjectName="dbo.Product" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByUnits" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByUnits" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="FillByUnits">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Product_Number, Description, Units_On_Hand, Price FROM dbo.Product where Units_On_Hand &gt; 100</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
         </Tables>
         <Sources />
@@ -73,7 +90,7 @@ SELECT Product_Number, Description, Units_On_Hand, Price FROM Product WHERE (Pro
   <xs:element name="ProductDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="ProductDataSet" msprop:Generator_UserDSName="ProductDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Product" msprop:Generator_TableClassName="ProductDataTable" msprop:Generator_TableVarName="tableProduct" msprop:Generator_TablePropName="Product" msprop:Generator_RowDeletingName="ProductRowDeleting" msprop:Generator_RowChangingName="ProductRowChanging" msprop:Generator_RowEvHandlerName="ProductRowChangeEventHandler" msprop:Generator_RowDeletedName="ProductRowDeleted" msprop:Generator_UserTableName="Product" msprop:Generator_RowChangedName="ProductRowChanged" msprop:Generator_RowEvArgName="ProductRowChangeEvent" msprop:Generator_RowClassName="ProductRow">
+        <xs:element name="Product" msprop:Generator_TableClassName="ProductDataTable" msprop:Generator_TableVarName="tableProduct" msprop:Generator_RowChangedName="ProductRowChanged" msprop:Generator_TablePropName="Product" msprop:Generator_RowDeletingName="ProductRowDeleting" msprop:Generator_RowChangingName="ProductRowChanging" msprop:Generator_RowEvHandlerName="ProductRowChangeEventHandler" msprop:Generator_RowDeletedName="ProductRowDeleted" msprop:Generator_RowClassName="ProductRow" msprop:Generator_UserTableName="Product" msprop:Generator_RowEvArgName="ProductRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Product_Number" msprop:Generator_ColumnVarNameInTable="columnProduct_Number" msprop:Generator_ColumnPropNameInRow="Product_Number" msprop:Generator_ColumnPropNameInTable="Product_NumberColumn" msprop:Generator_UserColumnName="Product_Number">
